@@ -1,11 +1,88 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Hello World</title>
+  <title>Matchmaker 2025</title>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <p>Welcome to your first HTML page.</p>
+  <h1>Matchmaker 2025</h1>
+  <p>In this program you will find out if you and I are a perfect match.
+There will be 5 questions to answer. For every question, answer 5
+if you strongly agree, 4 if you agree, 3 if you neither
+agree nor disagree, 2 if you disagree, and 1 if you
+strongly disagree.</p>
+  <link rel="stylesheet" href="MatchmakerLite.css">
+
+
+<label>Lebron James is the best basketball player ever!</label><br />
+<select id="q1">
+		<option value="5">Strongly Agree</option>
+		<option value="4">Agree</option>
+		<option value="3">Neither agree nor disagree</option>
+		<option value="2">Disagree</option>
+		<option value="1">Strongly Disagree</option>
+	</select>
+	<br /><br />
+
+  <label>Dogs are better than cats.</label><br />
+  <select id="q2">
+		<option value="5">Strongly Agree</option>
+		<option value="4">Agree</option>
+		<option value="3">Neither agree nor disagree</option>
+		<option value="2">Disagree</option>
+		<option value="1">Strongly Disagree</option>
+	</select>
+	<br /><br />
+
+  <label>Football is the best sport to watch.</label><br />
+  <select id="q3">
+		<option value="5">Strongly Agree</option>
+		<option value="4">Agree</option>
+		<option value="3">Neither agree nor disagree</option>
+		<option value="2">Disagree</option>
+		<option value="1">Strongly Disagree</option>
+	</select>
+	<br /><br />
+
+  <label>Windows is better than mac.</label><br />
+  <select id="q4">
+		<option value="5">Strongly Agree</option>
+		<option value="4">Agree</option>
+		<option value="3">Neither agree nor disagree</option>
+		<option value="2">Disagree</option>
+		<option value="1">Strongly Disagree</option>
+	</select>
+	<br /><br />
+
+  <label>Drake is the best rapper of all time.</label><br />
+  <select id="q5">
+		<option value="5">Strongly Agree</option>
+		<option value="4">Agree</option>
+		<option value="3">Neither agree nor disagree</option>
+		<option value="2">Disagree</option>
+		<option value="1">Strongly Disagree</option>
+	</select>
+	<br /><br />
+
+  <button onclick="calculateCompatibility()">Calculate Compatibility</button>
+	<p id="compatibility"></p>
+
+  <script>
+console.log("Starting Matchmaker Lite...");
+
+function calculateCompatibility() {
+	console.log("calculateCompatibility()");
+
+let question1Response = document.getElementById('q1').selected0ptions [0].value;
+let question2Response = document.getElementById('q2').selected0ptions [0].value;
+let question3Response = document.getElementById('q3').selected0ptions [0].value;
+let question4Response = document.getElementById('q4').selected0ptions [0].value;
+let question5Response = document.getElementById('q5').selected0ptions [0].value;
+
+
+	document.getElementById("compatibility").innerHTML = "Your compatibility is..... ";
+}
+</script>
 </body>
 </html>
+
