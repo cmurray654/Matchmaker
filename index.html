@@ -3,89 +3,161 @@
 <head>
   <meta charset="utf-8">
   <title>Matchmaker 2025</title>
+  <style>
+    .badge { padding: 4px 8px; border-radius: 10px; font-weight: 600; display:inline-block; }
+    .good { background:#e8f5e9; color:#1b5e20; }
+    .ok   { background:#fff3e0; color:#e65100; }
+    .bad  { background:#ffebee; color:#b71c1c; }
+    .muted{ color:#555; }
+  </style>
+  <link rel="stylesheet" href="Matchmaker.css">
 </head>
 <body>
   <h1>💘Matchmaker 2025💘</h1>
+
   <p>In this program you will find out if you and I are a perfect match.
-There will be 5 questions to answer. For every question, answer 5
-if you strongly agree, 4 if you agree, 3 if you neither
-agree nor disagree, 2 if you disagree, and 1 if you
-strongly disagree.
-<br /><br />
-Your tap seals the deal!
-</p>
-  <link rel="stylesheet" href="MatchmakerLite.css">
+    There will be 5 questions to answer. For every question, answer 5
+    if you strongly agree, 4 if you agree, 3 if you neither
+    agree nor disagree, 2 if you disagree, and 1 if you
+    strongly disagree.
+    <br /><br />
+    Your tap seals the deal!
+  </p>
 
-
-<label>Lebron James is the best basketball player ever!</label><br />
-<select id="q1">
-		<option value="5">Strongly Agree</option>
-		<option value="4">Agree</option>
-		<option value="3">Neither agree nor disagree</option>
-		<option value="2">Disagree</option>
-		<option value="1">Strongly Disagree</option>
-	</select>
-	<br /><br />
+  <label>Lebron James is the best basketball player ever!</label><br />
+  <select id="q1">
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neither agree nor disagree</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+  <br /><br />
 
   <label>Nights are better than mornings.</label><br />
   <select id="q2">
-		<option value="5">Strongly Agree</option>
-		<option value="4">Agree</option>
-		<option value="3">Neither agree nor disagree</option>
-		<option value="2">Disagree</option>
-		<option value="1">Strongly Disagree</option>
-	</select>
-	<br /><br />
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neither agree nor disagree</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+  <br /><br />
 
   <label>Football is the best sport to watch.</label><br />
   <select id="q3">
-		<option value="5">Strongly Agree</option>
-		<option value="4">Agree</option>
-		<option value="3">Neither agree nor disagree</option>
-		<option value="2">Disagree</option>
-		<option value="1">Strongly Disagree</option>
-	</select>
-	<br /><br />
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neither agree nor disagree</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+  <br /><br />
 
   <label>Windows is better than mac.</label><br />
   <select id="q4">
-		<option value="5">Strongly Agree</option>
-		<option value="4">Agree</option>
-		<option value="3">Neither agree nor disagree</option>
-		<option value="2">Disagree</option>
-		<option value="1">Strongly Disagree</option>
-	</select>
-	<br /><br />
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neither agree nor disagree</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+  <br /><br />
 
   <label>Drake is the best rapper of all time.</label><br />
   <select id="q5">
-		<option value="5">Strongly Agree</option>
-		<option value="4">Agree</option>
-		<option value="3">Neither agree nor disagree</option>
-		<option value="2">Disagree</option>
-		<option value="1">Strongly Disagree</option>
-	</select>
-	<br /><br />
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neither agree nor disagree</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+  <br /><br />
 
   <button onclick="calculateCompatibility()">Calculate Compatibility</button>
-	<p id="compatibility"></p>
+  <p id="compatibility"></p>
 
   <script>
-console.log("Starting Matchmaker Lite...");
+    console.log("Starting Matchmaker 2025...");
 
-function calculateCompatibility() {
-	console.log("calculateCompatibility()");
+    const DESIRED_RESPONSE = [5, 3, 5, 3, 5];
+    const MAX_SCORE = 25;
 
-let question1Response = document.getElementById('q1').selected0ptions [0].value;
-let question2Response = document.getElementById('q2').selected0ptions [0].value;
-let question3Response = document.getElementById('q3').selected0ptions [0].value;
-let question4Response = document.getElementById('q4').selected0ptions [0].value;
-let question5Response = document.getElementById('q5').selected0ptions [0].value;
+    // My customizable thresholds
+    const THRESHOLDS = [
+      { min: 90, label: "Perfect match 💘", cls: "good" },
+      { min: 75, label: "Weak match",  cls: "ok" },
+      { min: 60, label: "Poor match 😕",    cls: "bad"   },
+      { min: 40, label: "Bad match",     cls: "bad"   },
+      { min: 0,  label: "Not a match 😬",   cls: "bad"  },
+    ];
 
+   function getTier(percent) {
+      return THRESHOLDS.find(t => percent >= t.min);
+    }
 
-	document.getElementById("compatibility").innerHTML = "Your compatibility is..... ";
-}
-</script>
+    // Closing remarks
+    function randPick(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+      
+    function getClosingRemark(percent) {
+      if (percent >= 90) {
+        return randPick([
+          "That’s a chef’s kiss match. Let’s plan something fun!",
+        ]);
+      } else if (percent >= 75) {
+        return randPick([
+         "Maybe we could hangout sometime?",
+        ]);
+      } else if (percent >= 60) {
+        return randPick([
+          "A few differences, we can be friends though.",
+        ]);
+      } else if (percent >= 40) {
+        return randPick([
+          "Sorry, I don’t think this is going to work out.",
+        ]);
+      } else {
+        return randPick([
+          "Yikes, probably best we don’t see each other again.",
+        ]);
+      }
+    }
+    
+    function calculateCompatibility() {
+      const responses = [
+        Number(document.getElementById("q1").value),
+        Number(document.getElementById("q2").value),
+        Number(document.getElementById("q3").value),
+        Number(document.getElementById("q4").value),
+        Number(document.getElementById("q5").value),
+      ];
+
+      const compat = responses.map((r, i) => 5 - Math.abs(r - DESIRED_RESPONSE[i]));
+
+      let total = compat.reduce((a, b) => a + b, 0);
+      const percent = Math.round((total / MAX_SCORE) * 100);
+
+      const tier = getTier(percent);
+      const remark = getClosingRemark(percent);
+
+      const perQ = `
+        <br><span class="muted"><strong>Per-Question (out of 5):</strong>
+        Q1 ${compat[0]} • Q2 ${compat[1]} • Q3 ${compat[2]} • Q4 ${compat[3]} • Q5 ${compat[4]}</span>
+      `;
+
+      const html = `
+        <strong>Total Compatibility:</strong> ${percent}%<br>
+        <span class="badge ${tier.cls}">${tier.label}</span>
+        <br><br><em>${remark}</em>
+        ${perQ}
+      `;
+
+      document.getElementById("compatibility").innerHTML = html;
+
+      console.log({ responses, compat, percent, tier, remark });
+    }
+  </script>
 </body>
 </html>
-
